@@ -29,7 +29,7 @@ class NameButton {
     this.eGui.style.textAlign = 'center';
   }
 
- 
+
   getGui() {
     return this.eGui;
   }
@@ -63,7 +63,7 @@ const gridOptions = {
         toolPanel: 'agFiltersToolPanel',
       }, {
         id: 'customStats',
-        labelDefault: 'Save changes',
+        labelDefault: 'Save / Refresh',
         labelKey: 'customStats',
         toolPanel: CustomStatsToolPanel,
         toolPanelParams: {
@@ -107,7 +107,21 @@ gridApi.setFilterModel(JSON.parse(localStorage.getItem('filters')));
 function saveChanges() {
   localStorage.setItem('state', JSON.stringify(gridApi.getColumnState()))
   localStorage.setItem("filters", JSON.stringify(gridApi.getFilterModel()))
+  
   window.alert('Changes are saved')
 
 }
+
+function refreshChanges() {
+  gridApi.setGridOption('rowData', jsonData)
+  gridApi.setFilterModel(null);
+  gridApi.resetColumnState();
+  localStorage.setItem('state', JSON.stringify(gridApi.getColumnState()))
+  localStorage.setItem("filters", JSON.stringify(gridApi.getFilterModel()))
+
+  window.alert('Refresh Data ')
+
+}
+
+
 

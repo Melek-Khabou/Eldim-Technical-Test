@@ -3,20 +3,38 @@ class CustomStatsToolPanel {
     init() {
         const { el } = redom;
         const saveChangesButton =
-            el("button", {
-                onclick: () => saveChanges(),
+            el("div", {
                 style: {
+                    display: "flex",
+                    flexDirection: "column",
                     textAlign: "center",
                     position: "absolute",
                     top: "25%",
                     left: "25%"
 
-                }
-            },
-                'Save Changes'
 
-            )
-            ;
+                }
+            }, el("button", {
+                onclick: () => saveChanges(),
+                style: {
+                    margin: "10px"
+
+                }
+
+            },
+                'Save Changes'), el("button", {
+                    onclick: () =>
+                        refreshChanges()
+
+                    ,
+                    style: {
+                        margin: "10px"
+
+                    }
+
+                },
+                    'Refresh'));
+
         this.eGui = saveChangesButton;
         this.eGui.style.textAlign = 'center';
 
