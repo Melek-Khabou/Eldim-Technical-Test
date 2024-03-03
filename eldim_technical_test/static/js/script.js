@@ -3,12 +3,12 @@ let gridApi;
 const gridOptions = {
   columnDefs: [
 
-    { headerName: "Nom", field: "name", filter: 'agTextColumnFilter', enableRowGroup: true },
+    { headerName: "Name", field: "name", filter: 'agTextColumnFilter', enableRowGroup: true },
     { headerName: "Position", field: "position", filter: 'agTextColumnFilter', enableRowGroup: true },
-    { headerName: "Bureau", field: "office", filter: 'agTextColumnFilter', enableRowGroup: true },
-    { headerName: "Âge", field: "age", filter: 'agNumberColumnFilter', sort: "desc", enableRowGroup: true },
-    { headerName: "Date de début", field: "startDate", filter: 'agDateColumnFilter', enableRowGroup: true },
-    { headerName: "Salaire", field: "salary", filter: 'agNumberColumnFilter', enableRowGroup: true },
+    { headerName: "Office", field: "office", filter: 'agTextColumnFilter', enableRowGroup: true },
+    { headerName: "Age", field: "age", filter: 'agNumberColumnFilter', sort: "desc", enableRowGroup: true },
+    { headerName: "Start date", field: "startDate", filter: 'agDateColumnFilter', enableRowGroup: true },
+    { headerName: "Salary", field: "salary", filter: 'agNumberColumnFilter', enableRowGroup: true },
   ],
   rowData: jsonData,
   sideBar: {
@@ -26,6 +26,14 @@ const gridOptions = {
         labelKey: 'filters',
         iconKey: 'filter',
         toolPanel: 'agFiltersToolPanel',
+      }, {
+        id: 'customStats',
+        labelDefault: 'Save changes',
+        labelKey: 'customStats',
+        toolPanel: CustomStatsToolPanel,
+        toolPanelParams: {
+          title: 'Custom Stats',
+        },
       },
 
     ],
@@ -53,4 +61,14 @@ gridApi = agGrid.createGrid(gridDiv, gridOptions);
 document.addEventListener('DOMContentLoaded', function () {
   gridApi
 })
+gridApi.applyColumnState({ state: JSON.parse(localStorage.getItem('state')) })
+gridApi.setFilterModel(JSON.parse(localStorage.getItem('filters')));
+
+
+function saveChanges() {
+  localStorage.setItem('state', JSON.stringify(gridApi.getColumnState()))
+  localStorage.setItem("filters", JSON.stringify(gridApi.getFilterModel()))
+  window.alert('Changes are saved')
+
+}
 
