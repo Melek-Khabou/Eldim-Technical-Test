@@ -4,7 +4,7 @@ const gridOptions = {
   columnDefs: [
     { headerName: "Nom", field: "name" },
     { headerName: "Position", field: "position" },
-    { headerName: "Bureau", field: "office" },
+    { headerName: "Bureau", field: "office",sort:'desc' },
     { headerName: "Âge", field: "age" },
     { headerName: "Date de début", field: "startDate" },
     { headerName: "Salaire", field: "salary" },
