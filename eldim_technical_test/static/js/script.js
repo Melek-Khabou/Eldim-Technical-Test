@@ -1,9 +1,44 @@
 let gridApi;
 
+class NameButton {
+  eGui;
+
+  init(params) {
+    const { el } = redom;
+    const nameButton =
+      el("button", {
+        onclick: () => {
+          const rowNode = gridApi.getRowNode(params.value);
+          const newSalary = (params.data.salary * 1.1).toFixed(3);
+          rowNode.setData({ ...params.data, salary: newSalary });
+
+        },
+        style: {
+          textAlign: "center",
+          position: "absolute",
+          top: "25%",
+          left: "25%"
+
+        }
+      },
+        params.value
+
+      )
+      ;
+    this.eGui = nameButton;
+    this.eGui.style.textAlign = 'center';
+  }
+
+ 
+  getGui() {
+    return this.eGui;
+  }
+}
+
 const gridOptions = {
   columnDefs: [
 
-    { headerName: "Name", field: "name", filter: 'agTextColumnFilter', enableRowGroup: true },
+    { headerName: "Name", field: "name", filter: 'agTextColumnFilter', enableRowGroup: true, cellRenderer: NameButton },
     { headerName: "Position", field: "position", filter: 'agTextColumnFilter', enableRowGroup: true },
     { headerName: "Office", field: "office", filter: 'agTextColumnFilter', enableRowGroup: true },
     { headerName: "Age", field: "age", filter: 'agNumberColumnFilter', sort: "desc", enableRowGroup: true },
@@ -39,6 +74,10 @@ const gridOptions = {
     ],
 
   },
+  getRowId: (params) => {
+    return params.data.name;
+  },
+  enableCellChangeFlash: true,
 };
 
 const { el, mount } = redom;
@@ -52,7 +91,7 @@ const pageTitleLink = el("link", {
 });
 mount(document.head, pageTitleLink);
 
-const gridContainer = el("div", { id: "myGrid", style: "height: 500px;width: 1000px;", class: "ag-theme-alpine" })
+const gridContainer = el("div", { id: "myGrid", style: "height: 500px;width: 1200px;", class: "ag-theme-alpine" })
 mount(document.body, gridContainer);
 
 var gridDiv = document.querySelector('#myGrid');
