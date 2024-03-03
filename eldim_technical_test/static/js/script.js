@@ -2,12 +2,12 @@ let gridApi;
 
 const gridOptions = {
   columnDefs: [
-    { headerName: "Nom", field: "name" },
-    { headerName: "Position", field: "position" },
-    { headerName: "Bureau", field: "office",sort:'desc' },
-    { headerName: "Âge", field: "age" },
-    { headerName: "Date de début", field: "startDate" },
-    { headerName: "Salaire", field: "salary" },
+    { headerName: "Nom", field: "name", filter: 'agTextColumnFilter' },
+    { headerName: "Position", field: "position", filter: 'agTextColumnFilter' },
+    { headerName: "Bureau", field: "office", filter: 'agTextColumnFilter' },
+    { headerName: "Âge", field: "age", filter: 'agNumberColumnFilter', sort: "desc", },
+    { headerName: "Date de début", field: "startDate", filter: 'agDateColumnFilter' },
+    { headerName: "Salaire", field: "salary", filter: 'agNumberColumnFilter' },
   ],
   rowData: jsonData,
 };
